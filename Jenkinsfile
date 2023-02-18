@@ -21,24 +21,8 @@ pipeline {
 
     stage('Deliver') {
       steps{
-        deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://172.31.87.232:9090/')], contextPath: null, war: 'target/calculator.war'
+        deploy adapters: [tomcat9(credentialsId: 'f79d5183-29ae-4bb6-9a2b-c1614e80a13a', path: '', url: 'http://172.31.21.72:8282/')], contextPath: null, war: 'target/calculator.war'
      }
-    }
-    
-    stage('Docker Build') {
-      steps {
-        sh 'docker build -t pbeniwal/mycalcwithwar:v$BUILD_NUMBER .'
-      }
-    }
-    
-    stage('Docker Push') {
-      steps {
-      	withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push pbeniwal/mycalcwithwar:v$BUILD_NUMBER'
-        }
-      }
-    }
-    
+    }    
   }
 }
