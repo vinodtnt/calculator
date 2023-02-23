@@ -1,2 +1,2 @@
 FROM vinodtnt/ubuntuapacheserver
-COPY index.html /var/www/html/index.html
+COPY /home/ubuntu/calculator/index.html /var/www/html/index.html
